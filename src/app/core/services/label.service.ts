@@ -55,6 +55,7 @@ const HIGH_DEFINITION =
   '<p>A flaw that affects most users and causes major problems for users.' + 'i.e., makes the product almost unusable for most users.</p>';
 
 const FUNCTIONALITY_BUG_DEFINITION = '<p>A functionality does not work as specified/expected.</p>';
+const UI_FLAW_DEFINITION = '<p>A flaw in the UI</p>';
 const FEATURE_FLAW_DEFINITION =
   '<p>Some functionality missing from a feature delivered in the current version in ' +
   'a way that the feature becomes less useful to the intended target user for <i>normal</i> usage. ' +
@@ -101,7 +102,8 @@ const REQUIRED_LABELS = {
   type: {
     DocumentationBug: new Label('type', 'DocumentationBug', COLOR_PURPLE_LIGHT, DOCUMENTATION_BUG_DEFINITION),
     FeatureFlaw: new Label('type', 'FeatureFlaw', COLOR_PURPLE_LIGHT, FEATURE_FLAW_DEFINITION),
-    FunctionalityBug: new Label('type', 'FunctionalityBug', COLOR_PURPLE, FUNCTIONALITY_BUG_DEFINITION)
+    FunctionalityBug: new Label('type', 'FunctionalityBug', COLOR_PURPLE, FUNCTIONALITY_BUG_DEFINITION),
+    UiFlaw: new Label('type', 'UiFlaw', COLOR_RED_LIGHT, UI_FLAW_DEFINITION)
   },
   response: {
     Accepted: new Label('response', 'Accepted', COLOR_GREEN, ACCEPTED_DEFINITION),
