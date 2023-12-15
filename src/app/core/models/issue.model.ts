@@ -317,7 +317,7 @@ export interface Issues {
 
 export const SEVERITY_ORDER = { '-': 0, VeryLow: 1, Low: 2, Medium: 3, High: 4 };
 
-export const ISSUE_TYPE_ORDER = { '-': 0, DocumentationBug: 1, FeatureFlaw: 2, FunctionalityBug: 3 };
+export const ISSUE_TYPE_ORDER = { '-': 0, DocumentationBug: 1, FeatureFlaw: 2, FunctionalityBug: 3, UiFlaw: 4 };
 
 export enum STATUS {
   Incomplete = 'Incomplete',
