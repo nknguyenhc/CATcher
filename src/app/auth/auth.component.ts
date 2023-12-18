@@ -80,7 +80,9 @@ export class AuthComponent implements OnInit, OnDestroy {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          throw new Error(data.error);
+          this.logger.info(`AuthComponent: Error authenticating, server responds with ${data.error}. Falling back on sessionStorage.`);
+          this.authService.storeOAuthAccessTokenFromSession();
+          return;
         }
         this.authService.storeOAuthAccessToken(data.token);
         this.logger.info('AuthComponent: Sucessfully obtained access token');

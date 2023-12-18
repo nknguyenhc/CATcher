@@ -56,6 +56,16 @@ export class AuthService {
   storeOAuthAccessToken(token: string) {
     this.githubService.storeOAuthAccessToken(token);
     this.accessToken.next(token);
+    sessionStorage.setItem('token', token);
+  }
+
+  storeOAuthAccessTokenFromSession() {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      this.logger.warn('AuthService: No value/empty string found in "token" value in sessionStorage.');
+      throw new Error('Invalid authentication token.');
+    }
+    this.storeOAuthAccessToken(token);
   }
 
   reset(): void {
