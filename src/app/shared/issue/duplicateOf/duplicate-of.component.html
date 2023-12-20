@@ -52,9 +52,17 @@
   </mat-select>
 
   <div>
-    <span *ngIf="issue.duplicated" style="margin-top: 5px">
+    <span *ngIf="issue.duplicated && !isLoading" style="margin-top: 5px">
       {{ issue.duplicateOf ? '#' + issue.duplicateOf + ': ' + (issueService.getIssue(issue.duplicateOf) | async).title : 'Not specified' }}
     </span>
     <span *ngIf="!issue.duplicated" style="margin-top: 5px"> - </span>
+    <mat-progress-spinner
+      *ngIf="isLoading"
+      color="primary"
+      mode="indeterminate"
+      diameter="40"
+      strokeWidth="5"
+      style="margin: auto"
+    ></mat-progress-spinner>
   </div>
 </div>
