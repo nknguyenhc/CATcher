@@ -20,6 +20,7 @@ import { applySearchFilter } from '../../issue-tables/search-filter';
 })
 export class DuplicateOfComponent implements OnInit, OnDestroy {
   isEditing = false;
+  isLoading = false;
   duplicatedIssueList: Observable<Issue[]>;
   searchFilterCtrl: FormControl = new FormControl();
   filteredDuplicateIssueList: ReplaySubject<Issue[]> = new ReplaySubject<Issue[]>(1);
@@ -81,8 +82,12 @@ export class DuplicateOfComponent implements OnInit, OnDestroy {
 
   updateDuplicateStatus(event: MatSelectChange) {
     const latestIssue = this.getUpdatedIssue(event);
+    this.isLoading = true;
     this.issueService.updateIssueWithComment(latestIssue, latestIssue.issueComment).subscribe(
-      (issue) => this.issueUpdated.emit(issue),
+      (issue) => {
+        this.isLoading = false;
+        this.issueUpdated.emit(issue);
+      },
       (error) => this.errorHandlingService.handleError(error)
     );
   }
