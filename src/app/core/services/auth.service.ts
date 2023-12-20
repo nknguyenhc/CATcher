@@ -96,6 +96,28 @@ export class AuthService {
     return this.authStateSource.getValue() === AuthState.Authenticated;
   }
 
+  /**
+   * Stores the route of a login-protected view before redirecting to login view.
+   * @param next The route to store.
+   */
+  storeNextRoute(next: string) {
+    sessionStorage.setItem('next', next);
+  }
+
+  /**
+   * Get the route of the login-protected view that the user initially wanted to direct to.
+   */
+  getNextRoute(): string {
+    return sessionStorage.getItem('next');
+  }
+
+  /**
+   * Clears the next route info.
+   */
+  clearNextRoute() {
+    sessionStorage.removeItem('next');
+  }
+
   changeAuthState(newAuthState: AuthState) {
     if (newAuthState === AuthState.Authenticated) {
       const sessionId = generateSessionId();

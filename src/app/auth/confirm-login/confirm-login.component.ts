@@ -44,8 +44,14 @@ export class ConfirmLoginComponent implements OnInit {
    */
   handleAuthSuccess() {
     this.authService.setTitleWithPhaseDetail();
-    this.router.navigateByUrl(this.phaseService.currentPhase);
     this.authService.changeAuthState(AuthState.Authenticated);
+    const nextRoute = this.authService.getNextRoute();
+    this.authService.clearNextRoute();
+    if (nextRoute && this.phaseService.isValidRoute(nextRoute)) {
+      this.router.navigateByUrl(nextRoute);
+    } else {
+      this.router.navigateByUrl(this.phaseService.currentPhase);
+    }
   }
 
   /**

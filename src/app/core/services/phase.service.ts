@@ -62,6 +62,13 @@ export class PhaseService {
     return this.phaseRepoOwners[phase];
   }
 
+  /**
+   * Checks whether the given route is allowed in this phase.
+   */
+  isValidRoute(route: string): boolean {
+    return route.startsWith('/' + this.currentPhase);
+  }
+
   fetchSessionData(): Observable<SessionData> {
     return this.githubService.fetchSettingsFile().pipe(map((data) => data as SessionData));
   }
