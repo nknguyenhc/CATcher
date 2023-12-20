@@ -13,6 +13,7 @@ import { PhaseService } from '../../../core/services/phase.service';
   encapsulation: ViewEncapsulation.None
 })
 export class DuplicatedIssuesComponent implements OnInit {
+  isLoading = false;
   duplicatedIssues: Observable<Issue[]>;
 
   @Input() issue: Issue;
@@ -30,8 +31,12 @@ export class DuplicatedIssuesComponent implements OnInit {
 
   removeDuplicateStatus(duplicatedIssue: Issue) {
     const latestIssue = this.getUpdatedIssueWithRemovedDuplicate(duplicatedIssue);
+    this.isLoading = true;
     this.issueService.updateIssueWithComment(latestIssue, latestIssue.issueComment).subscribe(
-      (issue) => this.issueService.updateLocalStore(issue),
+      (issue) => {
+        this.isLoading = false;
+        this.issueService.updateLocalStore(issue);
+      },
       (error) => this.errorHandlingService.handleError(error)
     );
   }
